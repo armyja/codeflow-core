@@ -24,7 +24,7 @@ public abstract class BaseFlowchartTest {
     codeFlow = CodeFlow.builder()
         .failFast(true)
         .strictMode(false)
-        .useNative(true)
+        .useNative(false)
         .workDir("examples")
         .outDir("tests")
         .format(Format.PNG)

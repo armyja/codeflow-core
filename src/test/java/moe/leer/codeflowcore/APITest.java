@@ -28,7 +28,7 @@ public class APITest extends BaseFlowchartTest {
   public static void main(String[] args) throws IOException {
     CodeFlow codeFlow = CodeFlow.builder()
         .failFast(true)
-        .useNative(true)
+        .useNative(false)
         .workDir("examples")
         .outDir("tests")
         .format(Format.PNG)

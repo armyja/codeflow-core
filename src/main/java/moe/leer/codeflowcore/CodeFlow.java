@@ -90,10 +90,6 @@ public class CodeFlow {
   // use graphviz native binding
   private boolean useNative;
 
-  static {
-    NativeUtil.loadLibraryFromResource("gv");
-  }
-
   /**
    * height and width are ignored when <code>useIgnore</code> is true
    */
@@ -126,6 +122,10 @@ public class CodeFlow {
     this.workDir = workDir;
     this.outDir = outDir;
     this.format = format;
+
+    if (useNative) {
+      NativeUtil.loadLibraryFromResource("gv");
+    }
   }
 
   public CodeFlow parse(@NotNull Supplier<String> supplier) throws CodeFlowException {
