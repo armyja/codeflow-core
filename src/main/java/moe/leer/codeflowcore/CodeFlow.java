@@ -43,10 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.util.function.Supplier;
 
@@ -397,6 +394,24 @@ public class CodeFlow {
 
     public String toString() {
       return "CodeFlow.CodeFlowBuilder(supportClass=" + this.supportClass + ", failFast=" + this.failFast + ", useNative=" + this.useNative + ", height=" + this.height + ", width=" + this.width + ", workDir=" + this.workDir + ", outDir=" + this.outDir + ", format=" + this.format + ", outFile=" + ")";
+    }
+  }
+
+  public static void main(String[] args) {
+    try (FileWriter writer = new FileWriter(args[1])) {
+      CodeFlow codeFlow = CodeFlow.builder()
+              .failFast(true)
+              .useNative(false)
+              .workDir("./")
+              .outDir("./")
+              .format(Format.PNG)
+              .build();
+      CodeFlow codeFlow1 = codeFlow.parseFile(args[0]);
+      writer.write("");
+      writer.write(codeFlow1.toDOT());
+      writer.flush();
+    } catch (IOException | CodeFlowException e) {
+      e.printStackTrace();
     }
   }
 }
